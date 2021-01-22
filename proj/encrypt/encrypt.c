@@ -1,10 +1,8 @@
 //
 // encrypt.c
 //
-
 #include <string.h>
 #include "encrypt.h"
-
 
 char CHARS[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 int CHARS_LEN = 62;
@@ -22,13 +20,14 @@ char shiftChar(char c, int shift, int direction)
   //   shiftChar('b', 3, 0) : '8'
 
   int i;
-  for(i = 0; i < CHARS_LEN; i++){
+  for (i = 0; i < CHARS_LEN; i++){
     if(c  == CHARS[i]){
       break;
     }
   }
 
-  if (direction == 1){
+  if(direction == 1){
+
        for(int j = 0; j < shift; j++){
            i++;
            if (i == CHARS_LEN){
@@ -36,6 +35,7 @@ char shiftChar(char c, int shift, int direction)
            }
        }
   }
+
  else {
     for(int j = 0; j < shift; j++){
       i--;
@@ -45,7 +45,6 @@ char shiftChar(char c, int shift, int direction)
     }
   }
   return CHARS[i];
-
 }
 
 void encrypt(char str[], int shifts[], int shiftslen)

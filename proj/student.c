@@ -2,23 +2,19 @@
 //
 // student.c
 //
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "student.h"
 #include "encrypt.h"
 
-
 const char* STUFILE = "studentdata.txt";
 
-// number of students in an array
+// number of students
 int numStudents = 0;
 
-// student pointer array
+// student pointer for the student array
 Student* students[100] = {0};
-
 
 void createStudent(char* fname, char* lname, int age, int id)
 {
@@ -41,25 +37,23 @@ void createStudent(char* fname, char* lname, int age, int id)
   numStudents++;
 }
 
-
 void deleteStudent(Student* student)
 {
+  // clear the memory
   free(student->firstName);
   free(student->lastName);
   free(student);
 }
 
-
 void deleteStudents()
 {
-  // pointer set values to 0 and adjusting the numStudents to 0
+  // set number of students to 0
   for(int i = 0; i < numStudents; i++)
   {
     students[i] = 0;
   }
   numStudents = 0;
 }
-
 
 void saveStudents(int key)
 {
@@ -70,7 +64,7 @@ void saveStudents(int key)
   //       james dean 21 2345 
   //       katy jones 18 4532 
   FILE* fp = fopen(STUFILE, "w");
-  if (fp){ 
+  if (fp){
     for(int i = 0; i <  numStudents; i++){
       int keys[1];
       keys[0]=key;
@@ -90,10 +84,9 @@ void saveStudents(int key)
   }
 }
 
-
 void loadStudents(int key)
 {
-  // load the students from the data file overwriting all exisiting students in memory
+  // load the students from the data file overwriting all students in memory
   deleteStudents();
   FILE* fp;
   fp = fopen(STUFILE, "r");
@@ -121,14 +114,12 @@ void loadStudents(int key)
   printf("Loaded %d students\n", numStudents);
 }
 
-
 void printStudent(Student* student)
 {
   printf("  Student: %s %s\n", student->firstName, student->lastName);
   printf("    age: %d\n", student->age);
   printf("    id: %ld\n", student->id); 
 }
-
 
 void printStudents()
 {
